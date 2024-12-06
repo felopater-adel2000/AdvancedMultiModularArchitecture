@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
             AdvancedMultiModularArchitectureTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Felopater Adel Boshra",
+                        name = "${DataProvider.USER_NAME} ${MapProvider.MAP_ID}",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         modifier = modifier.fillMaxSize(),
-        text = "Hello $name!",
+        text = "Hello $name",
         color = Color.Red,
         textAlign = TextAlign.Center,
         fontSize = 20.sp,
