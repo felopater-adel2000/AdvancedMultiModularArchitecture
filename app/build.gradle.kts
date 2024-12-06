@@ -67,7 +67,13 @@ android {
 
 
     productFlavors {
+        BuildFlavor.Google.create(this)
 
+        BuildFlavor.Huawei.create(this)
+
+        BuildFlavor.Driver.create(this)
+
+        BuildFlavor.Client.create(this)
     }
 
     compileOptions {
