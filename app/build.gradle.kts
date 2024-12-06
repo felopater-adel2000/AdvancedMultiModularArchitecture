@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.utils.`is`
+
 plugins {
     id(BuildPlugins.ANDROID_APPLICATION)
     id(BuildPlugins.KOTLIN_ANDROID)
@@ -19,8 +21,39 @@ android {
     }
 
     buildTypes {
-        release {
+        /*release {
             isMinifyEnabled = false
+//            applicationIdSuffix = ".release"
+//            versionNameSuffix = "-release"
+//            enableUnitTestCoverage = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }*/
+
+        getByName(BuildTypes.RELEASE) {
+            isMinifyEnabled = Build.Release.isMinifyEnabled
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+
+        getByName(BuildTypes.DEBUG) {
+            isMinifyEnabled = Build.Debug.isMinifyEnabled
+            versionNameSuffix = Build.Debug.versionNameSuffix
+            applicationIdSuffix = Build.Debug.applicationIdSuffix
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+
+        create(BuildTypes.RELEASE_EXTERNAL_QA) {
+            isMinifyEnabled = Build.ReleaseExternalQA.isMinifyEnabled
+            versionNameSuffix = Build.ReleaseExternalQA.versionNameSuffix
+            applicationIdSuffix = Build.ReleaseExternalQA.applicationIdSuffix
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
