@@ -60,13 +60,27 @@ android {
             )
         }
     }
+
+
+    flavorDimensions.add(BuildDimension.APP)
+    flavorDimensions.add(BuildDimension.STORE)
+
+
+    productFlavors {
+
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
+
     buildFeatures {
         compose = true
     }
