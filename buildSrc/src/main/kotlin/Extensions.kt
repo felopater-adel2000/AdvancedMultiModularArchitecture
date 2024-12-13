@@ -1,7 +1,7 @@
 import org.gradle.api.Project
 import java.util.Properties
 
-private const val LOCAL_PROPERTIES = "dev_credentials"
+private const val LOCAL_PROPERTIES = "dev_credentials.properties"
 
 fun Project.getLocalProperty(propertyName: String): String
 {
@@ -14,5 +14,5 @@ fun Project.getLocalProperty(propertyName: String): String
         }
     }
 
-    return localProperties.getProperty(propertyName)
+    return localProperties.getProperty(propertyName) ?: throw Exception("Property $propertyName not found in $LOCAL_PROPERTIES")
 }

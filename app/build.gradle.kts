@@ -21,8 +21,8 @@ android {
     }
 
     signingConfigs {
-        BuildSigning.Release.create(this)
-        BuildSigning.ReleaseExternalQa.create(this)
+        BuildSigning.Release(project).create(this)
+        BuildSigning.ReleaseExternalQa(project).create(this)
     }
 
     buildTypes {
@@ -51,7 +51,7 @@ android {
             isMinifyEnabled = Build.ReleaseExternalQA.isMinifyEnabled
             versionNameSuffix = Build.ReleaseExternalQA.versionNameSuffix
             applicationIdSuffix = Build.ReleaseExternalQA.applicationIdSuffix
-            signingConfig = signingConfigs.getByName(BuildTypes.RELEASE_EXTERNAL_QA)
+            //signingConfig = signingConfigs.getByName(BuildTypes.RELEASE_EXTERNAL_QA)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
