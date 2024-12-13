@@ -29,6 +29,7 @@ android {
 
         getByName(BuildTypes.RELEASE) {
             isMinifyEnabled = Build.Release.isMinifyEnabled
+            signingConfig = signingConfigs.getByName(BuildTypes.RELEASE)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -39,6 +40,7 @@ android {
             isMinifyEnabled = Build.Debug.isMinifyEnabled
             versionNameSuffix = Build.Debug.versionNameSuffix
             applicationIdSuffix = Build.Debug.applicationIdSuffix
+            signingConfig = signingConfigs.getByName(BuildTypes.DEBUG)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -49,6 +51,7 @@ android {
             isMinifyEnabled = Build.ReleaseExternalQA.isMinifyEnabled
             versionNameSuffix = Build.ReleaseExternalQA.versionNameSuffix
             applicationIdSuffix = Build.ReleaseExternalQA.applicationIdSuffix
+            signingConfig = signingConfigs.getByName(BuildTypes.RELEASE_EXTERNAL_QA)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
