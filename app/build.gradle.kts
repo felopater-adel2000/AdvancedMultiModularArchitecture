@@ -20,17 +20,11 @@ android {
         testInstrumentationRunner = TestBuildConfig.TEXT_INSTRUMENTATION_RUNNER
     }
 
+    signingConfigs {
+
+    }
+
     buildTypes {
-        /*release {
-            isMinifyEnabled = false
-//            applicationIdSuffix = ".release"
-//            versionNameSuffix = "-release"
-//            enableUnitTestCoverage = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }*/
 
         getByName(BuildTypes.RELEASE) {
             isMinifyEnabled = Build.Release.isMinifyEnabled
