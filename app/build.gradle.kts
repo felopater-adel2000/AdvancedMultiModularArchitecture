@@ -1,9 +1,18 @@
-import org.jetbrains.kotlin.gradle.utils.`is`
+import build.BuildConfig
+import build.BuildCreator
+import build.BuildDimension
+import build.BuildTypes
+import dependencies.Dependencies
+import falvors.BuildFlavor
+import release.ReleaseConfig
+import siging.BuildSigning
+import test.TestBuildConfig
 
 plugins {
-    id(BuildPlugins.ANDROID_APPLICATION)
-    id(BuildPlugins.KOTLIN_ANDROID)
-    id(BuildPlugins.KOTLIN_COMPOSE)
+
+    id(plugs.BuildPlugins.ANDROID_APPLICATION)
+    id(plugs.BuildPlugins.KOTLIN_ANDROID)
+    id(plugs.BuildPlugins.KOTLIN_COMPOSE)
 }
 
 android {
@@ -54,31 +63,31 @@ android {
             signingConfig = signingConfigs.getByName(BuildTypes.RELEASE_EXTERNAL_QA)
         }
 
-        /*getByName(BuildTypes.RELEASE) {
-            isMinifyEnabled = Build.Release.isMinifyEnabled
-            signingConfig = signingConfigs.getByName(BuildTypes.RELEASE)
+        /*getByName(build.BuildTypes.RELEASE) {
+            isMinifyEnabled = build.Build.Release.isMinifyEnabled
+            signingConfig = signingConfigs.getByName(build.BuildTypes.RELEASE)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
 
-        getByName(BuildTypes.DEBUG) {
-            isMinifyEnabled = Build.Debug.isMinifyEnabled
-            versionNameSuffix = Build.Debug.versionNameSuffix
-            applicationIdSuffix = Build.Debug.applicationIdSuffix
-            signingConfig = signingConfigs.getByName(BuildTypes.DEBUG)
+        getByName(build.BuildTypes.DEBUG) {
+            isMinifyEnabled = build.Build.Debug.isMinifyEnabled
+            versionNameSuffix = build.Build.Debug.versionNameSuffix
+            applicationIdSuffix = build.Build.Debug.applicationIdSuffix
+            signingConfig = signingConfigs.getByName(build.BuildTypes.DEBUG)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
 
-        create(BuildTypes.RELEASE_EXTERNAL_QA) {
-            isMinifyEnabled = Build.ReleaseExternalQA.isMinifyEnabled
-            versionNameSuffix = Build.ReleaseExternalQA.versionNameSuffix
-            applicationIdSuffix = Build.ReleaseExternalQA.applicationIdSuffix
-            //signingConfig = signingConfigs.getByName(BuildTypes.RELEASE_EXTERNAL_QA)
+        create(build.BuildTypes.RELEASE_EXTERNAL_QA) {
+            isMinifyEnabled = build.Build.ReleaseExternalQA.isMinifyEnabled
+            versionNameSuffix = build.Build.ReleaseExternalQA.versionNameSuffix
+            applicationIdSuffix = build.Build.ReleaseExternalQA.applicationIdSuffix
+            //signingConfig = signingConfigs.getByName(build.BuildTypes.RELEASE_EXTERNAL_QA)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

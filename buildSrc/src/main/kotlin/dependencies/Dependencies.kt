@@ -1,3 +1,5 @@
+package dependencies
+
 object Dependencies {
     const val ANDROIDX_CORE_KTX = "androidx.core:core-ktx:${DependenciesVersions.CORE_KTX}"
     const val ANDROIDX_LIFECYCLE_RUNTIME_KTX = "androidx.lifecycle:lifecycle-runtime-ktx:${DependenciesVersions.LIFECYCLE_RUNTIME_KTX}"

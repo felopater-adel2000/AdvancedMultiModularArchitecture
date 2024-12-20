@@ -1,5 +1,7 @@
+package siging
+
 import com.android.build.api.dsl.ApkSigningConfig
-import com.android.build.api.dsl.ApplicationProductFlavor
+import extensions.getLocalProperty
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import java.io.File
