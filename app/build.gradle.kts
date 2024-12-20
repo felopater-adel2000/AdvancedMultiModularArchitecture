@@ -27,7 +27,34 @@ android {
 
     buildTypes {
 
-        getByName(BuildTypes.RELEASE) {
+        BuildCreator.Debug(project).create(this).apply {
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+
+            signingConfig = signingConfigs.getByName(BuildTypes.DEBUG)
+        }
+
+        BuildCreator.Release(project).create(this).apply {
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+
+            signingConfig = signingConfigs.getByName(BuildTypes.RELEASE)
+        }
+
+        BuildCreator.ReleaseExternalQa(project).create(this).apply {
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+
+            signingConfig = signingConfigs.getByName(BuildTypes.RELEASE_EXTERNAL_QA)
+        }
+
+        /*getByName(BuildTypes.RELEASE) {
             isMinifyEnabled = Build.Release.isMinifyEnabled
             signingConfig = signingConfigs.getByName(BuildTypes.RELEASE)
             proguardFiles(
@@ -56,7 +83,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-        }
+        }*/
     }
 
 
