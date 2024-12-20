@@ -3,6 +3,15 @@ import build.BuildCreator
 import build.BuildDimension
 import build.BuildTypes
 import dependencies.Dependencies
+import dependencies.androidx
+import dependencies.hilt
+import dependencies.loginModule
+import dependencies.okHttp
+import dependencies.retrofit
+import dependencies.room
+import dependencies.testDebugDeps
+import dependencies.testDeps
+import dependencies.testImplDeps
 import falvors.BuildFlavor
 import release.ReleaseConfig
 import siging.BuildSigning
@@ -132,21 +141,16 @@ android {
 
 dependencies {
 
-    implementation(Dependencies.ANDROIDX_CORE_KTX)
-    implementation(Dependencies.ANDROIDX_LIFECYCLE_RUNTIME_KTX)
-    implementation(Dependencies.ANDROIDX_ACTIVITY_COMPOSE)
     implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
-    implementation(Dependencies.ANDROIDX_UI)
-    implementation(Dependencies.ANDROIDX_UI_GRAPHICS)
-    implementation(Dependencies.ANDROIDX_UI_TOOLING_PREVIEW)
-    implementation(Dependencies.ANDROIDX_MATERIAL3)
+    androidx()
+    testDeps()
+    testImplDeps()
+    testDebugDeps()
 
+    hilt()
+    room()
+    retrofit()
+    okHttp()
 
-    testImplementation(TestDependencies.JUNIT)
-    androidTestImplementation(TestDependencies.ANDROIDX_JUNIT)
-    androidTestImplementation(TestDependencies.ANDROIDX_ESPRESSO_CORE)
-    androidTestImplementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
-    androidTestImplementation(TestDependencies.ANDROIDX_UI_TEST_JUNIT4)
-    debugImplementation(TestDependencies.ANDROIDX_UI_TOOLING)
-    debugImplementation(TestDependencies.ANDROIDX_UI_TEST_MANIFEST)
+    loginModule()
 }

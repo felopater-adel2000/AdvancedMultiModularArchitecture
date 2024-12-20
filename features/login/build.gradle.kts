@@ -1,3 +1,14 @@
+import dependencies.Dependencies
+import dependencies.androidx
+import dependencies.hilt
+import dependencies.loginModule
+import dependencies.okHttp
+import dependencies.retrofit
+import dependencies.room
+import dependencies.testDebugDeps
+import dependencies.testDeps
+import dependencies.testImplDeps
+
 plugins {
     id(plugs.BuildPlugins.ANDROID_LIBRARY)
     id(plugs.BuildPlugins.KOTLIN_ANDROID)
@@ -17,6 +28,11 @@ android {
     }
 
     buildTypes {
+
+        create("releaseExternalQa") {
+            
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -36,10 +52,12 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
+    androidx()
+    testDeps()
+    testImplDeps()
+    testDebugDeps()
+
+    hilt()
+    room()
 }
