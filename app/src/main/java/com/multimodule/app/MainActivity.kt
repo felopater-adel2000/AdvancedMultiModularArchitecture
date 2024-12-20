@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
             AdvancedMultiModularArchitectureTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "${DataProvider.USER_NAME} ${MapProvider.MAP_ID}",
+                        name = "${BuildConfig.BASE_URL} ${MapProvider.MAP_ID}",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         modifier = modifier.fillMaxSize(),
-        text = "Hello $name",
+        text = "BASE_URL = $name",
         color = Color.Red,
         textAlign = TextAlign.Center,
         fontSize = 20.sp,
@@ -51,6 +51,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     AdvancedMultiModularArchitectureTheme {
-        Greeting("Android")
+        Greeting(BuildConfig.BASE_URL)
     }
 }
