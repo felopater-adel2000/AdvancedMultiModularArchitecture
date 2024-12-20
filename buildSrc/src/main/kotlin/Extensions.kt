@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.ApplicationBuildType
 import org.gradle.api.Project
 import java.util.Properties
 
@@ -15,4 +16,19 @@ fun Project.getLocalProperty(propertyName: String): String
     }
 
     return localProperties.getProperty(propertyName) ?: throw Exception("Property $propertyName not found in $LOCAL_PROPERTIES")
+}
+
+fun ApplicationBuildType.buildConfigStringField(name: String, value: String)
+{
+    this.buildConfigField("String", name, value)
+}
+
+fun ApplicationBuildType.buildConfigIntField(name: String, value: String)
+{
+    this.buildConfigField("int", name, value)
+}
+
+fun ApplicationBuildType.buildConfigBooleanField(name: String, value: String)
+{
+    this.buildConfigField("boolean", name, value)
 }
