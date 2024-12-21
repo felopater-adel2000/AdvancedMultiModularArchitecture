@@ -4,12 +4,11 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.project
 import test.TestDependencies
 
-fun DependencyHandler.room(){
+fun DependencyHandler.room() {
     implementation(Dependencies.roomKtx)
     implementation(Dependencies.roomRuntime)
     kapt(Dependencies.roomCompiler)
 }
-
 
 fun DependencyHandler.retrofit() {
     implementation(Dependencies.retrofit)
@@ -28,7 +27,7 @@ fun DependencyHandler.hilt() {
 }
 
 fun DependencyHandler.androidx() {
-    implementation(Dependencies.ANDROIDX_CORE_KTX)
+    implementation(Dependencies.ANDROIDX_CORE)
     implementation(Dependencies.ANDROIDX_LIFECYCLE_RUNTIME_KTX)
     implementation(Dependencies.ANDROIDX_ACTIVITY_COMPOSE)
     implementation(Dependencies.ANDROIDX_UI)
@@ -52,10 +51,10 @@ fun DependencyHandler.testDeps() {
 fun DependencyHandler.testImplDeps() {
     androidTestImplementation(TestDependencies.ANDROIDX_JUNIT)
     androidTestImplementation(TestDependencies.ANDROIDX_ESPRESSO_CORE)
-    androidTestImplementation(TestDependencies.ANDROIDX_UI_TEST_JUNIT4)
+    androidTestImplementation(TestDependencies.ANDROIDX_COMPOSE_UI_TEST)
 }
 
 fun DependencyHandler.testDebugDeps() {
     debugImplementation(Dependencies.ANDROIDX_UI_TOOLING_PREVIEW)
-    debugImplementation(TestDependencies.ANDROIDX_UI_TEST_JUNIT4)
+    debugImplementation(TestDependencies.ANDROIDX_COMPOSE_UI_TEST_MANIFEST)
 }

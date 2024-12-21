@@ -10,19 +10,18 @@ import plugs.SharedLibraryGradlePlugin
 plugins {
     id(plugs.BuildPlugins.ANDROID_LIBRARY)
 }
-
 apply<SharedLibraryGradlePlugin>()
 
 android {
-    namespace = "com.multimodule.login"
+    namespace = "com.minafarid.login"
 }
 
 dependencies {
     implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
     androidx()
+    hilt()
+    room()
     testDeps()
     testImplDeps()
     testDebugDeps()
-    hilt()
-    room()
 }
