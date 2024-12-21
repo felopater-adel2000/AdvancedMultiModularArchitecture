@@ -1,13 +1,16 @@
 package plugs
 
 import build.BuildConfig
+import build.BuildCreator
 import build.BuildDimension
+import build.BuildTypes
 import com.android.build.api.dsl.LibraryExtension
 import falvors.BuildFlavor
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
+import siging.BuildSigning
 import test.TestBuildConfig
 
 
@@ -33,20 +36,39 @@ class SharedLibraryGradlePlugin : Plugin<Project> {
                 testInstrumentationRunner = TestBuildConfig.TEXT_INSTRUMENTATION_RUNNER
             }
 
+            signingConfigs {
+                BuildSigning.Release(project).create(this)
+                BuildSigning.ReleaseExternalQa(project).create(this)
+            }
+
             buildTypes {
-                release {
-                    isMinifyEnabled = false
+
+                BuildCreator.Debug(project).createLibrary(this).apply {
                     proguardFiles(
                         getDefaultProguardFile("proguard-android-optimize.txt"),
                         "proguard-rules.pro"
                     )
+
+                    signingConfig = signingConfigs.getByName(BuildTypes.DEBUG)
                 }
 
-                create("releaseExternalQa") {
-                    initWith(getByName("release"))
-                    matchingFallbacks.add("release")
+                BuildCreator.Release(project).createLibrary(this).apply {
+                    proguardFiles(
+                        getDefaultProguardFile("proguard-android-optimize.txt"),
+                        "proguard-rules.pro"
+                    )
+
+                    signingConfig = signingConfigs.getByName(BuildTypes.RELEASE)
                 }
 
+                BuildCreator.ReleaseExternalQa(project).createLibrary(this).apply {
+                    proguardFiles(
+                        getDefaultProguardFile("proguard-android-optimize.txt"),
+                        "proguard-rules.pro"
+                    )
+
+                    signingConfig = signingConfigs.getByName(BuildTypes.RELEASE_EXTERNAL_QA)
+                }
             }
 
             flavorDimensions.add(BuildDimension.APP)
