@@ -16,7 +16,6 @@ import falvors.BuildFlavor
 import release.ReleaseConfig
 import siging.BuildSigning
 import test.TestBuildConfig
-import test.TestDependencies
 
 plugins {
     id(plugs.BuildPlugins.ANDROID_APPLICATION)
@@ -51,7 +50,7 @@ android {
         BuildCreator.Debug(project).create(this).apply {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
 
             signingConfig = signingConfigs.getByName(BuildTypes.DEBUG)
@@ -60,7 +59,7 @@ android {
         BuildCreator.Release(project).create(this).apply {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
 
             signingConfig = signingConfigs.getByName(BuildTypes.RELEASE)
@@ -69,17 +68,15 @@ android {
         BuildCreator.ReleaseExternalQa(project).create(this).apply {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
 
             signingConfig = signingConfigs.getByName(BuildTypes.RELEASE_EXTERNAL_QA)
         }
     }
 
-
     flavorDimensions.add(BuildDimension.APP)
     flavorDimensions.add(BuildDimension.STORE)
-
 
     productFlavors {
         BuildFlavor.Google.create(this)
@@ -96,11 +93,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-
     kotlinOptions {
         jvmTarget = "11"
     }
-
 
     buildFeatures {
         compose = true

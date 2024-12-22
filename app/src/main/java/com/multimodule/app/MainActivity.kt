@@ -26,11 +26,17 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "${BuildConfig.BASE_URL} ${MapProvider.MAP_ID}",
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding),
                     )
                 }
             }
         }
+
+        val counter = 100
+    }
+
+    private fun test() {
+        val counter = 100
     }
 }
 
@@ -42,7 +48,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         color = Color.Red,
         textAlign = TextAlign.Center,
         fontSize = 20.sp,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
 
     )
 }
