@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+@Suppress("FunctionNaming")
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         modifier = modifier.fillMaxSize(),
@@ -55,6 +56,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
+@Suppress("FunctionNaming")
 fun GreetingPreview() {
     AdvancedMultiModularArchitectureTheme {
         Greeting(BuildConfig.BASE_URL)

@@ -13,7 +13,7 @@ plugins {
 apply<SharedLibraryGradlePlugin>()
 
 android {
-    namespace = "com.minafarid.login"
+    namespace = "com.multimodule.login"
 }
 
 dependencies {

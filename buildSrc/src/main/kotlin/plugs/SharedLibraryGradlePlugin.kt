@@ -26,6 +26,8 @@ class SharedLibraryGradlePlugin : Plugin<Project> {
         plugins.apply(BuildPlugins.KAPT)
         plugins.apply(plugs.BuildPlugins.KOTLIN_COMPOSE)
         plugins.apply(plugs.BuildPlugins.KTLINT)
+        plugins.apply(plugs.BuildPlugins.SPOTLESS)
+        plugins.apply(plugs.BuildPlugins.DETEKT)
     }
 
     private fun Project.addAndroidConfigurations() {
@@ -88,8 +90,8 @@ class SharedLibraryGradlePlugin : Plugin<Project> {
             }
 
             compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility = JavaVersion.VERSION_1_8
+                sourceCompatibility = JavaVersion.VERSION_11
+                targetCompatibility = JavaVersion.VERSION_11
             }
         }
     }
@@ -97,7 +99,7 @@ class SharedLibraryGradlePlugin : Plugin<Project> {
     private fun Project.applyKotlinOptions() {
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
             kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_1_8.toString()
+                jvmTarget = JavaVersion.VERSION_11.toString()
             }
         }
     }
