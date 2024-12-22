@@ -29,6 +29,7 @@ class SharedLibraryGradlePlugin : Plugin<Project> {
         plugins.apply(plugs.BuildPlugins.SPOTLESS)
         plugins.apply(plugs.BuildPlugins.DETEKT)
         plugins.apply(plugs.BuildPlugins.UPDATE_DEPS_VERSIONS)
+        plugins.apply(plugs.BuildPlugins.DOKKA)
     }
 
     private fun Project.addAndroidConfigurations() {
