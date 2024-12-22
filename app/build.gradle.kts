@@ -24,6 +24,7 @@ plugins {
     id(plugs.BuildPlugins.ANDROID)
     id(plugs.BuildPlugins.KAPT)
     id(plugs.BuildPlugins.KTLINT)
+    id(plugs.BuildPlugins.SPOTLESS)
 }
 
 android {
