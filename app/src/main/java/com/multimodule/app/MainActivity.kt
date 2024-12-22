@@ -38,6 +38,8 @@ class MainActivity : ComponentActivity() {
     private fun test() {
         val counter = 100
     }
+
+    fun mainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMain() {}
 }
 
 @Composable
