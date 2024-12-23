@@ -1,6 +1,5 @@
 package com.multimodule.data
 
-
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
