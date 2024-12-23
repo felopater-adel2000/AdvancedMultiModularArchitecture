@@ -5,9 +5,12 @@ import build.BuildTypes
 import deps.Dependencies
 import deps.DependenciesVersions
 import deps.androidx
+import deps.dataModule
+import deps.domainModule
 import deps.hilt
 import deps.loginModule
 import deps.okHttp
+import deps.presentationModule
 import deps.retrofit
 import deps.room
 import deps.testDebugDeps
@@ -123,4 +126,8 @@ dependencies {
     okHttp()
 
     loginModule()
+
+    dataModule()
+    domainModule()
+    presentationModule()
 }

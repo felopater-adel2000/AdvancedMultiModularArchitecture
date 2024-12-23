@@ -1,4 +1,7 @@
 
+import deps.hilt
+import deps.okHttp
+import deps.retrofit
 import deps.testDebugDeps
 import deps.testDeps
 import deps.testImplDeps
@@ -17,4 +20,8 @@ dependencies {
     testDeps()
     testImplDeps()
     testDebugDeps()
+
+    okHttp()
+    retrofit()
+    hilt()
 }
