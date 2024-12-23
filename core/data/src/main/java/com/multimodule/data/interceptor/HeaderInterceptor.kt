@@ -1,4 +1,4 @@
-package com.multimodule.data
+package com.multimodule.data.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
