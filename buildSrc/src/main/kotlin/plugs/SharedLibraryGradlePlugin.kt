@@ -9,6 +9,7 @@ import falvors.BuildFlavor
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
 import siging.BuildSigning
 import test.TestBuildConfig
@@ -33,7 +34,8 @@ class SharedLibraryGradlePlugin : Plugin<Project> {
     }
 
     private fun Project.addAndroidConfigurations() {
-        extensions.getByType(LibraryExtension::class.java).apply {
+        //extensions.getByType(LibraryExtension::class.java).apply {
+        extensions.getByType<LibraryExtension>().apply {
             compileSdk = BuildConfig.COMPILE_SDK_VERSION
 
             defaultConfig {

@@ -1,4 +1,4 @@
-package dependencies
+package deps
 
 object DependenciesVersions {
     const val COMPOSE_BOM = "2024.11.00"
@@ -16,5 +16,6 @@ object DependenciesVersions {
     const val RETROFIT_COROUTINE_ADAPTER_VERSION = "0.9.2"
     const val OKHTTP = "5.0.0-alpha.2"
     const val HILT = "2.44"
+    const val HILT_COMPOSE = "1.2.0"
     const val ROOM = "2.6.1"
 }

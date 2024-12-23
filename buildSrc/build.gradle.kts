@@ -18,4 +18,5 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:2.0.0")
     implementation("org.jetbrains.dokka:kotlin-as-java-plugin:2.0.0")
     implementation("org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin:2.0.21")
+    implementation("com.squareup:javapoet:1.13.0")
 }

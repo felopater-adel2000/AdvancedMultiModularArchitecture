@@ -1,6 +1,6 @@
 package test
 
-import dependencies.DependenciesVersions
+import deps.DependenciesVersions
 
 object TestDependencies {
     const val ANDROIDX_JUNIT = "androidx.test.ext:junit:${DependenciesVersions.JUNIT_VERSION}"

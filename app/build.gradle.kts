@@ -2,16 +2,17 @@ import build.BuildConfig
 import build.BuildCreator
 import build.BuildDimension
 import build.BuildTypes
-import dependencies.Dependencies
-import dependencies.androidx
-import dependencies.hilt
-import dependencies.loginModule
-import dependencies.okHttp
-import dependencies.retrofit
-import dependencies.room
-import dependencies.testDebugDeps
-import dependencies.testDeps
-import dependencies.testImplDeps
+import deps.Dependencies
+import deps.DependenciesVersions
+import deps.androidx
+import deps.hilt
+import deps.loginModule
+import deps.okHttp
+import deps.retrofit
+import deps.room
+import deps.testDebugDeps
+import deps.testDeps
+import deps.testImplDeps
 import falvors.BuildFlavor
 import release.ReleaseConfig
 import siging.BuildSigning
@@ -28,6 +29,7 @@ plugins {
     id(plugs.BuildPlugins.DETEKT)
     id(plugs.BuildPlugins.UPDATE_DEPS_VERSIONS)
     id(plugs.BuildPlugins.DOKKA)
+    id(plugs.BuildPlugins.HILT) version deps.DependenciesVersions.HILT
 }
 
 android {

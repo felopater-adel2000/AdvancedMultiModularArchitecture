@@ -1,7 +1,7 @@
 
-import dependencies.testDebugDeps
-import dependencies.testDeps
-import dependencies.testImplDeps
+import deps.testDebugDeps
+import deps.testDeps
+import deps.testImplDeps
 import plugs.SharedLibraryGradlePlugin
 
 plugins {

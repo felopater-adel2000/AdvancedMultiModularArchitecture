@@ -1,10 +1,10 @@
-import dependencies.Dependencies
-import dependencies.androidx
-import dependencies.hilt
-import dependencies.room
-import dependencies.testDebugDeps
-import dependencies.testDeps
-import dependencies.testImplDeps
+import deps.Dependencies
+import deps.androidx
+import deps.hilt
+import deps.room
+import deps.testDebugDeps
+import deps.testDeps
+import deps.testImplDeps
 import plugs.SharedLibraryGradlePlugin
 
 plugins {
