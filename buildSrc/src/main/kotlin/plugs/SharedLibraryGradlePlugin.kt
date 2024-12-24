@@ -26,11 +26,11 @@ class SharedLibraryGradlePlugin : Plugin<Project> {
         plugins.apply(BuildPlugins.KOTLIN_ANDROID)
         plugins.apply(BuildPlugins.KAPT)
         plugins.apply(plugs.BuildPlugins.KOTLIN_COMPOSE)
-        plugins.apply(plugs.BuildPlugins.KTLINT)
+        /*plugins.apply(plugs.BuildPlugins.KTLINT)
         plugins.apply(plugs.BuildPlugins.SPOTLESS)
         plugins.apply(plugs.BuildPlugins.DETEKT)
         plugins.apply(plugs.BuildPlugins.UPDATE_DEPS_VERSIONS)
-        plugins.apply(plugs.BuildPlugins.DOKKA)
+        plugins.apply(plugs.BuildPlugins.DOKKA)*/
     }
 
     private fun Project.addAndroidConfigurations() {

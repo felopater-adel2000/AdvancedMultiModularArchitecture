@@ -1,18 +1,18 @@
 package com.multimodule.data.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.multimodule.data.interceptor.AUTHORIZATION_HEADER
 import com.multimodule.data.BuildConfig
-import com.multimodule.data.interceptor.CLIENT_ID_HEADER
-import com.multimodule.data.interceptor.HeaderInterceptor
 import com.multimodule.data.OkHttpClientProvider
-import com.multimodule.data.okhttp.OkHttpClientProviderInterface
 import com.multimodule.data.constants.ACCESS_TOKEN_TAG
 import com.multimodule.data.constants.CLIENT_ID_TAG
 import com.multimodule.data.constants.HEADER_INTERCEPTOR_TAG
 import com.multimodule.data.constants.LANGUAGE_TAG
 import com.multimodule.data.constants.LOGGING_INTERCEPTOR_TAG
 import com.multimodule.data.factory.ServiceFactory
+import com.multimodule.data.interceptor.AUTHORIZATION_HEADER
+import com.multimodule.data.interceptor.CLIENT_ID_HEADER
+import com.multimodule.data.interceptor.HeaderInterceptor
+import com.multimodule.data.okhttp.OkHttpClientProviderInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -98,7 +98,7 @@ class NetworkModule {
     fun provideOkHttpCallFactory(
         @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
         @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
-        okHttpClientProvider: OkHttpClientProviderInterface
+        okHttpClientProvider: OkHttpClientProviderInterface,
     ): Call.Factory {
         return okHttpClientProvider.getOkHttpClient(BuildConfig.PIN_CERTIFCATE)
             .addInterceptor(okHttpLoggingInterceptor)
@@ -127,5 +127,4 @@ class NetworkModule {
     fun provideServiceFactory(retrofit: Retrofit): ServiceFactory {
         return ServiceFactory(retrofit)
     }
-
 }
