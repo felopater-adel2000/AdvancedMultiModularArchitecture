@@ -1,6 +1,7 @@
 package com.multimodule.app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,7 +16,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import com.multimodule.app.ui.theme.AdvancedMultiModularArchitectureTheme
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,13 +38,27 @@ class MainActivity : ComponentActivity() {
         }
 
         val counter = 100
+
+
+        lifecycleScope.launch {
+            val response = async { getString() }
+
+            Log.d("Felo", "onCreate: after async")
+
+            val result = response.await()
+
+            Log.d("Felo", "onCreate: after await $result")
+
+
+        }
+
     }
 
-    private fun test() {
-        val counter = 100
-    }
 
-    fun mainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMainMain() {}
+    suspend fun getString(): String {
+        delay(10000)
+        return "Hello"
+    }
 }
 
 @Composable
