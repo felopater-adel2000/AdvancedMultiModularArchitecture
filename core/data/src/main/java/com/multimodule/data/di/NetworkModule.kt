@@ -1,8 +1,12 @@
 package com.multimodule.data.di
 
+import android.content.Context
+import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.multimodule.data.BuildConfig
 import com.multimodule.data.OkHttpClientProvider
+import com.multimodule.data.connectivity.NetworkMonitorImplementer
+import com.multimodule.data.connectivity.NetworkMonitorInterface
 import com.multimodule.data.constants.ACCESS_TOKEN_TAG
 import com.multimodule.data.constants.CLIENT_ID_TAG
 import com.multimodule.data.constants.HEADER_INTERCEPTOR_TAG
@@ -33,58 +37,17 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    @Named(LANGUAGE_TAG)
-    fun provideLanguage(): () -> Locale {
-        return { Locale.ENGLISH } // todo get locale from user prefs later, move me to config module
+    fun provideGson(): Gson {
+        return Gson()
     }
 
     @Provides
     @Singleton
-    @Named(ACCESS_TOKEN_TAG)
-    fun provideAccessToken(): () -> String? {
-        return { "" } // todo get access token from user prefs later, move me to config module
+    fun provideNetworkMonitor(context: Context): NetworkMonitorInterface {
+        return NetworkMonitorImplementer(context)
     }
 
-    @Provides
-    @Singleton
-    @Named(CLIENT_ID_TAG)
-    fun provideClientId(): String {
-        return "" // todo get client id from user prefs later, move me to config module
-    }
 
-    @Provides
-    @Singleton
-    @Named(HEADER_INTERCEPTOR_TAG)
-    fun provideHeaderInterceptor(
-        @Named(CLIENT_ID_TAG) clientId: String,
-        @Named(ACCESS_TOKEN_TAG) accessTokenProvider: () -> String?,
-        @Named(LANGUAGE_TAG) languageProvider: () -> Locale,
-    ): Interceptor {
-        return HeaderInterceptor(
-            clientId,
-            accessTokenProvider,
-            languageProvider,
-        )
-    }
-
-    // Http Logging Interceptor
-    @Provides
-    @Singleton
-    @Named(LOGGING_INTERCEPTOR_TAG)
-    fun provideOkHttpLoggingInterceptor(): Interceptor {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor.Level.BODY
-        } else {
-            HttpLoggingInterceptor.Level.NONE
-        }
-        if (!BuildConfig.DEBUG) {
-            interceptor.redactHeader(CLIENT_ID_HEADER) // redact any header that contains sensitive data.
-            interceptor.redactHeader(AUTHORIZATION_HEADER) // redact any header that contains sensitive data.
-        }
-
-        return interceptor
-    }
 
     @Provides
     @Singleton
@@ -98,8 +61,8 @@ class NetworkModule {
     fun provideOkHttpCallFactory(
         @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
         @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
-        okHttpClientProvider: OkHttpClientProviderInterface,
-    ): Call.Factory {
+        okHttpClientProvider: OkHttpClientProviderInterface
+    ): OkHttpClient {
         return okHttpClientProvider.getOkHttpClient(BuildConfig.PIN_CERTIFCATE)
             .addInterceptor(okHttpLoggingInterceptor)
             .addInterceptor(headerInterceptor)

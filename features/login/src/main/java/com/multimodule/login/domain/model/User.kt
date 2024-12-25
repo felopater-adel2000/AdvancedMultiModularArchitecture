@@ -1,6 +1,6 @@
-package com.multimodule.login.data.responses
+package com.multimodule.login.domain.model
 
-class LoginResponse(
+data class User(
     val id: String,
     val fullName: String,
     val email: String,
