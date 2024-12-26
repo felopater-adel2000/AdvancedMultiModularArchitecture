@@ -16,13 +16,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.lifecycleScope
 import com.multimodule.app.ui.theme.AdvancedMultiModularArchitectureTheme
+import com.multimodule.datastore.settings.AppSettings
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
+    lateinit var appSettingDataStore: DataStore<AppSettings>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

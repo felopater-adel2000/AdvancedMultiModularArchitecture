@@ -16,6 +16,12 @@ fun DependencyHandler.retrofit() {
     implementation(Dependencies.retrofitKotlinCoroutinesAdapter)
 }
 
+fun DependencyHandler.dataStore() {
+    implementation(Dependencies.datastore)
+    implementation(Dependencies.kotlinCollections)
+    implementation(Dependencies.kotlinSerilaizations)
+}
+
 fun DependencyHandler.okHttp() {
     implementation(Dependencies.okHttp)
     implementation(Dependencies.okHttpLoggingInterceptor)
@@ -51,6 +57,10 @@ fun DependencyHandler.homeModule() {
 
 fun DependencyHandler.dataModule() {
     moduleImplementation(project(":core:data"))
+}
+
+fun DependencyHandler.dataStoreModule() {
+    moduleImplementation(project(":core:datastore"))
 }
 
 fun DependencyHandler.domainModule() {

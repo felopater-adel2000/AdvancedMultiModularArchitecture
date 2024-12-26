@@ -6,6 +6,8 @@ import deps.Dependencies
 import deps.DependenciesVersions
 import deps.androidx
 import deps.dataModule
+import deps.dataStore
+import deps.dataStoreModule
 import deps.domainModule
 import deps.hilt
 import deps.loginModule
@@ -115,19 +117,19 @@ android {
 dependencies {
 
     implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
+    loginModule()
+    dataModule()
+    dataStoreModule()
+    dataStore()
+    domainModule()
+    presentationModule()
     androidx()
+    hilt()
+    room()
+    okHttp()
+    retrofit()
     testDeps()
     testImplDeps()
     testDebugDeps()
 
-    hilt()
-    room()
-    retrofit()
-    okHttp()
-
-    loginModule()
-
-    dataModule()
-    domainModule()
-    presentationModule()
 }

@@ -1,8 +1,4 @@
-
 import deps.dataStore
-import deps.hilt
-import deps.okHttp
-import deps.retrofit
 import deps.testDebugDeps
 import deps.testDeps
 import deps.testImplDeps
@@ -14,7 +10,7 @@ plugins {
 apply<SharedLibraryGradlePlugin>()
 
 android {
-    namespace = "com.multimodule.data"
+    namespace = "com.multimodule.datastore"
 }
 
 dependencies {
@@ -22,8 +18,5 @@ dependencies {
     testImplDeps()
     testDebugDeps()
 
-    okHttp()
-    retrofit()
-    hilt()
     dataStore()
 }
