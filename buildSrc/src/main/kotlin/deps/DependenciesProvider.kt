@@ -71,6 +71,16 @@ fun DependencyHandler.presentationModule() {
     moduleImplementation(project(":core:presentation"))
 }
 
+fun DependencyHandler.protoDataStore() {
+    implementation(Dependencies.datastore)
+    implementation(Dependencies.protoBufJavaLite)
+    implementation(Dependencies.protoBufKotlinLite)
+}
+
+fun DependencyHandler.protoDataStoreModule() {
+    moduleImplementation(project(":core:protodatasyore"))
+}
+
 fun DependencyHandler.testDeps() {
     testImplementation(TestDependencies.ANDROIDX_JUNIT)
 }
