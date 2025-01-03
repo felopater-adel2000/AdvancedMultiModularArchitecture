@@ -9,7 +9,6 @@ import deps.dataModule
 import deps.dataStore
 import deps.dataStoreModule
 import deps.domainModule
-import deps.hilt
 import deps.loginModule
 import deps.okHttp
 import deps.presentationModule
@@ -29,13 +28,8 @@ plugins {
     id(plugs.BuildPlugins.KOTLIN_ANDROID)
     id(plugs.BuildPlugins.KOTLIN_COMPOSE)
     id(plugs.BuildPlugins.ANDROID)
-    id(plugs.BuildPlugins.KAPT)
-    /*id(plugs.BuildPlugins.KTLINT)
-    id(plugs.BuildPlugins.SPOTLESS)
-    id(plugs.BuildPlugins.DETEKT)
-    id(plugs.BuildPlugins.UPDATE_DEPS_VERSIONS)
-    id(plugs.BuildPlugins.DOKKA)*/
-    id(plugs.BuildPlugins.HILT) version deps.DependenciesVersions.HILT
+    id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -125,7 +119,7 @@ dependencies {
     domainModule()
     presentationModule()
     androidx()
-    hilt()
+    //hilt()
     room()
     okHttp()
     retrofit()
@@ -134,5 +128,9 @@ dependencies {
     testDebugDeps()
 
     protoDataStoreModule()
+
+
+    implementation("com.google.dagger:hilt-android:2.54")
+    ksp("com.google.dagger:hilt-android-compiler:2.53.1")
 
 }

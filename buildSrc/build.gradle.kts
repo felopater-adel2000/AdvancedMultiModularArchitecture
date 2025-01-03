@@ -9,9 +9,9 @@ repositories {
 }
 
 dependencies {
-    api(kotlin("gradle-plugin:2.1.0"))
-    implementation("com.android.tools.build:gradle:8.7.3")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
+    api(kotlin("gradle-plugin:1.9.21"))
+    implementation("com.android.tools.build:gradle:8.5.2")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.7")
     implementation("com.github.ben-manes:gradle-versions-plugin:0.51.0")

@@ -10,14 +10,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -34,26 +39,39 @@ import com.multimodule.datastore.settings.AppSettings
 import com.multimodule.datastore.settings.AppSettingsSerializer
 import com.multimodule.datastore.settings.Language
 import com.multimodule.datastore.settings.Location
+import com.multimodule.protodatasyore.manager.preferences.PreferencesDataStoreInterface
+import com.multimodule.protodatasyore.manager.session.SessionDataStoreInterface
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    lateinit var appSettingsDataStore: DataStore<AppSettings>
+
+    lateinit var appSettingDataStore: DataStore<AppSettings>
+
+    @Inject
+    lateinit var sessionDataStoreInterface: SessionDataStoreInterface
+
+    @Inject
+    lateinit var preferencesDataStoreInterface: PreferencesDataStoreInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        appSettingsDataStore = DataStoreFactory.create(
+        appSettingDataStore = DataStoreFactory.create(
             serializer = AppSettingsSerializer(),
             produceFile = { dataStoreFile("app_settings.json") },
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
         )
 
+        // val room = Room.databaseBuilder()
         enableEdgeToEdge()
         setContent {
             AdvancedMultiModularArchitectureTheme {
@@ -61,65 +79,123 @@ class MainActivity : ComponentActivity() {
 //                    Greeting(
 //                        modifier = Modifier.padding(innerPadding),
 //                    )
-                    SettingsScreen(appSettingsDataStore, modifier = Modifier.padding(innerPadding))
+                    SettingsScreen(
+                        appSettingDataStore,
+                        Modifier.padding(innerPadding),
+                        sessionDataStoreInterface,
+                        preferencesDataStoreInterface,
+                    )
                 }
-
             }
         }
+
+        val counter = 100
+
+        println(counter)
+    }
+
+    fun mainMainMainMainMainMainMainMainMainMainMainMainMainMain() {
     }
 }
 
 @Composable
-fun SettingsScreen(appSettingsDataStore: DataStore<AppSettings>, modifier: Modifier = Modifier) {
+fun SettingsScreen(
+    appSettingDataStore: DataStore<AppSettings>,
+    modifier: Modifier,
+    sessionDataStoreInterface: SessionDataStoreInterface,
+    preferencesDataStoreInterface: PreferencesDataStoreInterface,
+) {
     val scope = rememberCoroutineScope()
-    val appSettings by appSettingsDataStore.data.collectAsState(initial = AppSettings())
+    val appSettings by appSettingDataStore.data.collectAsState(initial = AppSettings())
+    val accessTokenFlow by sessionDataStoreInterface.getAccessTokenFlow()
+        .collectAsState(initial = "")
+    var accessTokenValue by remember { mutableStateOf("Loading...") }
+
+    val languageFlow by preferencesDataStoreInterface.getLanguageFlow().collectAsState(initial = "")
+    var languageValue by remember { mutableStateOf("Loading...") }
 
     Column(modifier = Modifier.padding(50.dp)) {
-        Text(text = "Language: " + appSettings.language)
-        val newLocation = Location(37.4221, -122.0841)
-        DropdownMenu(
-            expanded = true,
-            onDismissRequest = {},
-        ) {
-            Language.values().forEach { language ->
-                DropdownMenuItem(text = { Text(text = language.name) }, onClick = {
-                    scope.launch {
-                        appSettingsDataStore.updateData { currentSettings ->
-                            currentSettings.copy(
-                                language = language,
-                                lastKnownLocations2 = currentSettings.lastKnownLocations2.add(
-                                    newLocation,
-                                ),
-                            )
-                        }
-                    }
-                })
+        // display saved language
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = "Access Token Flow: $accessTokenFlow")
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = "Language Flow: $languageFlow")
+
+        LaunchedEffect(Unit) {
+            scope.launch {
+                accessTokenValue = sessionDataStoreInterface.getAccessToken()
+                languageValue = preferencesDataStoreInterface.getLanguage()
             }
         }
-
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(text = "Last Known Locations:")
+        Text(text = "Access Token Value: $accessTokenValue")
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = "Language Value: $languageValue")
+        Spacer(modifier = Modifier.height(16.dp))
 
-        appSettings.lastKnownLocations2.forEach { location ->
+        Button(onClick = {
+            scope.launch {
+                sessionDataStoreInterface.setAccessToken("access token " + System.currentTimeMillis())
+                preferencesDataStoreInterface.setLanguage("language " + System.currentTimeMillis())
+            }
+        }) {
+            Text(text = "Insert")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(text = "Language: " + appSettings.language)
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // display saved locations
+
+        Text(text = "Last known locations: ")
+        appSettings.lastKnownLocations.forEach { location ->
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Lat: ${location.lat}, Long: ${location.long}")
+            Text(text = "Lat: ${location.lat} Lng: ${location.long}")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        val newLocation = Location(37.123, 122.908)
+
+        // create drop down menu to display language options and set location as well
+        Language.entries.forEach { language ->
+            DropdownMenuItem(text = { Text(text = language.name) }, onClick = {
+                scope.launch {
+                    appSettingDataStore.updateData { currentSettings ->
+                        currentSettings.copy(
+                            language = language,
+                            lastKnownLocations = currentSettings.lastKnownLocations.add(
+                                newLocation,
+                            ),
+                        )
+                    }
+                }
+            })
         }
     }
 }
 
 @Composable
 @Suppress("FunctionNaming")
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        modifier = modifier.fillMaxSize(),
-        text = "BASE_URL = $name",
-        color = Color.Red,
-        textAlign = TextAlign.Center,
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
-
-    )
+fun Greeting(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(
+            text = "Base Url: ${BuildConfig.BASE_URL}!",
+            modifier = modifier,
+        )
+        Text(
+            text = "DB Version: ${BuildConfig.DATABASE_VERSION}!",
+            modifier = modifier,
+        )
+        Text(
+            text = "Can Clear Cache: ${BuildConfig.CAN_CLEAR_CACHE}!",
+            modifier = modifier,
+        )
+        Text(
+            text = "Map Key: ${BuildConfig.MAP_KEY}!",
+            modifier = modifier,
+        )
+    }
 }
 
 @Preview(showBackground = true)
@@ -127,6 +203,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Suppress("FunctionNaming")
 fun GreetingPreview() {
     AdvancedMultiModularArchitectureTheme {
-        Greeting(BuildConfig.BASE_URL)
+        Greeting()
     }
 }

@@ -24,7 +24,7 @@ class SharedLibraryGradlePlugin : Plugin<Project> {
 
     private fun Project.addPluginConfigurations() {
         plugins.apply(BuildPlugins.KOTLIN_ANDROID)
-        plugins.apply(BuildPlugins.KAPT)
+//        plugins.apply(BuildPlugins.KAPT)
         plugins.apply(plugs.BuildPlugins.KOTLIN_COMPOSE)
         /*plugins.apply(plugs.BuildPlugins.KTLINT)
         plugins.apply(plugs.BuildPlugins.SPOTLESS)

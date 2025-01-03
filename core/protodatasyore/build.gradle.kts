@@ -9,6 +9,8 @@ import plugs.SharedLibraryGradlePlugin
 plugins {
     id(plugs.BuildPlugins.ANDROID_LIBRARY)
     id(plugs.BuildPlugins.GOOGLE_PROTOBUF)
+    id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp")
 }
 
 apply<SharedLibraryGradlePlugin>()
@@ -43,4 +45,7 @@ dependencies {
     testImplDeps()
     testDebugDeps()
     protoDataStore()
+
+    implementation("com.google.dagger:hilt-android:2.52")
+    ksp("com.google.dagger:hilt-android-compiler:2.52")
 }

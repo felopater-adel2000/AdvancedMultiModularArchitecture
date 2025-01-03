@@ -1,6 +1,5 @@
 
 import deps.dataStore
-import deps.hilt
 import deps.okHttp
 import deps.retrofit
 import deps.testDebugDeps
@@ -10,6 +9,8 @@ import plugs.SharedLibraryGradlePlugin
 
 plugins {
     id(plugs.BuildPlugins.ANDROID_LIBRARY)
+    id("com.google.devtools.ksp")
+    id("dagger.hilt.android.plugin")
 }
 apply<SharedLibraryGradlePlugin>()
 
@@ -24,6 +25,10 @@ dependencies {
 
     okHttp()
     retrofit()
-    hilt()
     dataStore()
+
+    //Hilt Dependency
+    implementation("com.google.dagger:hilt-android:2.52")
+    ksp("com.google.dagger:hilt-android-compiler:2.52")
+
 }

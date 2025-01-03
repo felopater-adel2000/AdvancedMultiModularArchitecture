@@ -7,7 +7,7 @@ import test.TestDependencies
 fun DependencyHandler.room() {
     implementation(Dependencies.roomKtx)
     implementation(Dependencies.roomRuntime)
-    kapt(Dependencies.roomCompiler)
+    //kapt(Dependencies.roomCompiler)
 }
 
 fun DependencyHandler.retrofit() {
@@ -27,14 +27,14 @@ fun DependencyHandler.okHttp() {
     implementation(Dependencies.okHttpLoggingInterceptor)
 }
 
-fun DependencyHandler.hilt() {
+/*fun DependencyHandler.hilt() {
     implementation(Dependencies.hiltAndroid)
     implementation(Dependencies.hiltCompose)
     implementation(Dependencies.hiltNavigation)
     kapt(Dependencies.hiltCompiler)
     kapt(Dependencies.hiltAgp)
     kapt(Dependencies.hiltCompilerKapt)
-}
+}*/
 
 fun DependencyHandler.androidx() {
     implementation(Dependencies.ANDROIDX_CORE)
