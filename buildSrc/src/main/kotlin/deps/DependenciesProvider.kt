@@ -95,3 +95,8 @@ fun DependencyHandler.testDebugDeps() {
     debugImplementation(Dependencies.ANDROIDX_UI_TOOLING_PREVIEW)
     debugImplementation(TestDependencies.ANDROIDX_COMPOSE_UI_TEST_MANIFEST)
 }
+
+fun DependencyHandler.chucker() {
+    releaseImplementation(Dependencies.chuckerRelease)
+    debugImplementation(Dependencies.chuckerDebug)
+}

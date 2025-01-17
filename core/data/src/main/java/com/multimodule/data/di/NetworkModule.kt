@@ -8,6 +8,7 @@ import com.multimodule.data.OkHttpClientProvider
 import com.multimodule.data.connectivity.NetworkMonitorImplementer
 import com.multimodule.data.connectivity.NetworkMonitorInterface
 import com.multimodule.data.constants.ACCESS_TOKEN_TAG
+import com.multimodule.data.constants.CHUCKER_INTERCEPTOR_TAG
 import com.multimodule.data.constants.CLIENT_ID_TAG
 import com.multimodule.data.constants.HEADER_INTERCEPTOR_TAG
 import com.multimodule.data.constants.LANGUAGE_TAG
@@ -61,11 +62,13 @@ class NetworkModule {
     fun provideOkHttpCallFactory(
         @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
         @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
+        @Named(CHUCKER_INTERCEPTOR_TAG) chuckerInterceptor: Interceptor,
         okHttpClientProvider: OkHttpClientProviderInterface
     ): OkHttpClient {
         return okHttpClientProvider.getOkHttpClient(BuildConfig.PIN_CERTIFCATE)
             .addInterceptor(okHttpLoggingInterceptor)
             .addInterceptor(headerInterceptor)
+            .addInterceptor(chuckerInterceptor)
             .retryOnConnectionFailure(true)
             .followRedirects(false)
             .followSslRedirects(false)

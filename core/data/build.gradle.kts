@@ -1,4 +1,5 @@
 
+import deps.chucker
 import deps.dataStore
 import deps.okHttp
 import deps.protoDataStore
@@ -24,7 +25,7 @@ dependencies {
     testDeps()
     testImplDeps()
     testDebugDeps()
-
+    chucker()
     okHttp()
     retrofit()
     dataStore()

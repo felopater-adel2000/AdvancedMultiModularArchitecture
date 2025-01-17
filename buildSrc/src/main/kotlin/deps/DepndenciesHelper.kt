@@ -23,6 +23,10 @@ fun DependencyHandler.debugImplementation(dependency: String) {
     add("kapt", dependency)
 }*/
 
+fun DependencyHandler.releaseImplementation(dependency: String) {
+    add("releaseImplementation", dependency)
+}
+
 fun DependencyHandler.moduleImplementation(dependency: Dependency) {
     add("implementation", dependency)
 }
