@@ -1,6 +1,8 @@
 
 import deps.dataStore
 import deps.okHttp
+import deps.protoDataStore
+import deps.protoDataStoreModule
 import deps.retrofit
 import deps.testDebugDeps
 import deps.testDeps
@@ -26,6 +28,7 @@ dependencies {
     okHttp()
     retrofit()
     dataStore()
+    protoDataStoreModule()
 
     //Hilt Dependency
     implementation("com.google.dagger:hilt-android:2.52")
