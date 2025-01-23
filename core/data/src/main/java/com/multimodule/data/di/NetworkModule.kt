@@ -8,6 +8,7 @@ import com.multimodule.data.OkHttpClientProvider
 import com.multimodule.data.connectivity.NetworkMonitorImplementer
 import com.multimodule.data.connectivity.NetworkMonitorInterface
 import com.multimodule.data.constants.ACCESS_TOKEN_TAG
+import com.multimodule.data.constants.AUTHENTICATION_INTERCEPTOR_TAG
 import com.multimodule.data.constants.CHUCKER_INTERCEPTOR_TAG
 import com.multimodule.data.constants.CLIENT_ID_TAG
 import com.multimodule.data.constants.HEADER_INTERCEPTOR_TAG
@@ -18,6 +19,7 @@ import com.multimodule.data.interceptor.AUTHORIZATION_HEADER
 import com.multimodule.data.interceptor.CLIENT_ID_HEADER
 import com.multimodule.data.interceptor.HeaderInterceptor
 import com.multimodule.data.okhttp.OkHttpClientProviderInterface
+import com.multimodule.data.service.SessionService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,12 +65,14 @@ class NetworkModule {
         @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
         @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
         @Named(CHUCKER_INTERCEPTOR_TAG) chuckerInterceptor: Interceptor,
+        @Named(AUTHENTICATION_INTERCEPTOR_TAG) authenticationInterceptor: Interceptor,
         okHttpClientProvider: OkHttpClientProviderInterface
     ): OkHttpClient {
         return okHttpClientProvider.getOkHttpClient(BuildConfig.PIN_CERTIFCATE)
             .addInterceptor(okHttpLoggingInterceptor)
             .addInterceptor(headerInterceptor)
             .addInterceptor(chuckerInterceptor)
+            .addInterceptor(authenticationInterceptor)
             .retryOnConnectionFailure(true)
             .followRedirects(false)
             .followSslRedirects(false)
@@ -92,5 +96,11 @@ class NetworkModule {
     @Singleton
     fun provideServiceFactory(retrofit: Retrofit): ServiceFactory {
         return ServiceFactory(retrofit)
+    }
+
+    @Provides
+    @Singleton
+    fun providesSessionService(serviceFactory: ServiceFactory): SessionService {
+        return serviceFactory.create(SessionService::class.java)
     }
 }
