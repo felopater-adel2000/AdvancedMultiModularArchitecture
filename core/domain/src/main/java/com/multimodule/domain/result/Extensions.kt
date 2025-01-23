@@ -1,4 +1,4 @@
-package com.multimodule.data.result
+package com.multimodule.domain.result
 
 import kotlinx.coroutines.isActive
 import kotlin.coroutines.coroutineContext

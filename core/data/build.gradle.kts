@@ -1,6 +1,7 @@
 
 import deps.chucker
 import deps.dataStore
+import deps.domainModule
 import deps.okHttp
 import deps.protoDataStore
 import deps.protoDataStoreModule
@@ -30,6 +31,7 @@ dependencies {
     retrofit()
     dataStore()
     protoDataStoreModule()
+    domainModule()
 
     //Hilt Dependency
     implementation("com.google.dagger:hilt-android:2.52")

@@ -1,4 +1,4 @@
-package com.multimodule.data.model
+package com.multimodule.domain.model
 
 data class ErrorMessage(
     val code: Int,

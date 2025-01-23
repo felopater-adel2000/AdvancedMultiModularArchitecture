@@ -9,8 +9,8 @@ import com.multimodule.data.source.NetworkDataSource
 import com.multimodule.login.data.servise.LoginService
 import com.multimodule.login.data.source.LoginRemote
 import com.multimodule.login.data.source.LoginRemoteImplementer
-import com.multimodule.login.domain.mapper.LoginMapper
-import com.multimodule.login.domain.mapper.LoginMapperImplementer
+import com.multimodule.login.data.mapper.LoginMapper
+import com.multimodule.login.data.mapper.LoginMapperImplementer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

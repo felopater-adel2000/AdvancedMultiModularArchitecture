@@ -1,6 +1,7 @@
 import deps.Dependencies
 import deps.androidx
 import deps.dataModule
+import deps.domainModule
 import deps.retrofit
 import deps.room
 import deps.testDebugDeps
@@ -26,7 +27,7 @@ dependencies {
     testDeps()
     testImplDeps()
     testDebugDeps()
-
+    domainModule()
     retrofit()
     dataModule()
 

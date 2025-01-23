@@ -1,14 +1,13 @@
 package com.multimodule.data.source
 
 import com.google.gson.Gson
-import com.multimodule.data.connectivity.NetworkMonitorInterface
 import com.multimodule.data.constants.HEADER_LOCATION
 import com.multimodule.data.error.getDefaultErrorResponse
 import com.multimodule.data.error.getErrorResponse
-import com.multimodule.data.error.toDomain
 import com.multimodule.data.interceptor.NoConnectivityException
+import com.multimodule.data.mapper.toDomain
 import com.multimodule.data.response.ErrorResponse
-import com.multimodule.data.result.OutCome
+import com.multimodule.domain.result.OutCome
 import com.multimodule.data.source.DataSource.Companion.NO_INTERNET
 import com.multimodule.data.source.DataSource.Companion.SEE_OTHERS
 import com.multimodule.data.source.DataSource.Companion.SSL_PINNING
