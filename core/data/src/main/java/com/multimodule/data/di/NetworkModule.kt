@@ -11,6 +11,7 @@ import com.multimodule.data.constants.ACCESS_TOKEN_TAG
 import com.multimodule.data.constants.AUTHENTICATION_INTERCEPTOR_TAG
 import com.multimodule.data.constants.CHUCKER_INTERCEPTOR_TAG
 import com.multimodule.data.constants.CLIENT_ID_TAG
+import com.multimodule.data.constants.CONNECTIVITY_INTERCEPTOR_TAG
 import com.multimodule.data.constants.HEADER_INTERCEPTOR_TAG
 import com.multimodule.data.constants.LANGUAGE_TAG
 import com.multimodule.data.constants.LOGGING_INTERCEPTOR_TAG
@@ -65,12 +66,14 @@ class NetworkModule {
         @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
         @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
         @Named(CHUCKER_INTERCEPTOR_TAG) chuckerInterceptor: Interceptor,
+        @Named(CONNECTIVITY_INTERCEPTOR_TAG) connectivityInterceptor: Interceptor,
         @Named(AUTHENTICATION_INTERCEPTOR_TAG) authenticationInterceptor: Interceptor,
-        okHttpClientProvider: OkHttpClientProviderInterface
+        okHttpClientProvider: OkHttpClientProviderInterface,
     ): OkHttpClient {
         return okHttpClientProvider.getOkHttpClient(BuildConfig.PIN_CERTIFCATE)
             .addInterceptor(okHttpLoggingInterceptor)
             .addInterceptor(headerInterceptor)
+            .addInterceptor(connectivityInterceptor)
             .addInterceptor(chuckerInterceptor)
             .addInterceptor(authenticationInterceptor)
             .retryOnConnectionFailure(true)

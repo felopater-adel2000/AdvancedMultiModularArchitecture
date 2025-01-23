@@ -5,10 +5,12 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.multimodule.data.BuildConfig
+import com.multimodule.data.connectivity.NetworkMonitorInterface
 import com.multimodule.data.constants.ACCESS_TOKEN_TAG
 import com.multimodule.data.constants.AUTHENTICATION_INTERCEPTOR_TAG
 import com.multimodule.data.constants.CHUCKER_INTERCEPTOR_TAG
 import com.multimodule.data.constants.CLIENT_ID_TAG
+import com.multimodule.data.constants.CONNECTIVITY_INTERCEPTOR_TAG
 import com.multimodule.data.constants.DISPATCHER_IO_TAG
 import com.multimodule.data.constants.HEADER_INTERCEPTOR_TAG
 import com.multimodule.data.constants.LANGUAGE_TAG
@@ -16,6 +18,7 @@ import com.multimodule.data.constants.LOGGING_INTERCEPTOR_TAG
 import com.multimodule.data.interceptor.AUTHORIZATION_HEADER
 import com.multimodule.data.interceptor.AuthenticationInterceptor
 import com.multimodule.data.interceptor.CLIENT_ID_HEADER
+import com.multimodule.data.interceptor.ConnectivityInterceptor
 import com.multimodule.data.interceptor.HeaderInterceptor
 import com.multimodule.protodatasyore.manager.session.SessionDataStoreInterface
 import dagger.Module
@@ -36,15 +39,24 @@ class InterceptorsModule {
 
     @Provides
     @Singleton
+    @Named(CONNECTIVITY_INTERCEPTOR_TAG)
+    fun provideConnectivityInterceptor(
+        networkMonitorInterface: NetworkMonitorInterface,
+    ): Interceptor {
+        return ConnectivityInterceptor(
+            networkMonitorInterface,
+        )
+    }
+
+    @Provides
+    @Singleton
     @Named(HEADER_INTERCEPTOR_TAG)
     fun provideHeaderInterceptor(
         @Named(CLIENT_ID_TAG) clientId: String,
-        @Named(ACCESS_TOKEN_TAG) accessTokenProvider: () -> String?,
         @Named(LANGUAGE_TAG) languageProvider: () -> Locale,
     ): Interceptor {
         return HeaderInterceptor(
             clientId,
-            accessTokenProvider,
             languageProvider,
         )
     }
