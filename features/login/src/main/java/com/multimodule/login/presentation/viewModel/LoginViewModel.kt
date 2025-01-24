@@ -2,14 +2,18 @@ package com.multimodule.login.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.multimodule.login.domain.model.User
 import com.multimodule.login.domain.usecase.LoginUseCase
 import com.multimodule.login.presentation.error.LoginError
 import com.multimodule.login.presentation.protocol.LoginInput
 import com.multimodule.login.presentation.protocol.LoginOutput
 import com.multimodule.login.presentation.protocol.LoginViewState
 import com.multimodule.login.presentation.validator.LoginValidator
+import com.multimodule.presentation.StateRenderer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +21,13 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase) : ViewModel() {
 
-    var loginViewState = LoginViewState()
+    private var loginViewState = LoginViewState()
+
+    private val _stateRendererMutableState = MutableStateFlow<StateRenderer<LoginViewState, User>>(
+        StateRenderer.ScreenContent(loginViewState),
+    )
+
+    val stateRendererFlow: StateFlow<StateRenderer<LoginViewState, User>> get() = _stateRendererMutableState
 
     // output of viewmodel
     private val _viewOutPut: Channel<LoginOutput> = Channel()
@@ -47,6 +57,9 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
             userNameError = userNameError,
             passwordError = passwordError,
         )
+
+        val newStateRenderer = StateRenderer.ScreenContent<LoginViewState, User>(loginViewState)
+        _stateRendererMutableState.value = newStateRenderer
     }
 
     private fun sendOutput(action: () -> LoginOutput) {
@@ -57,14 +70,25 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
 
     fun login() {
         viewModelScope.launch {
+            // loading popup state
+            val newStateRenderer = StateRenderer.LoadingFullScreen<LoginViewState, User>(loginViewState)
+            _stateRendererMutableState.value = newStateRenderer
             loginUseCase.execute(
                 LoginUseCase.Input(
                     username = loginViewState.userName,
                     password = loginViewState.password,
                 ),
                 success = {
+                    // loading popup state
+                    val newStateRenderer = StateRenderer.Success<LoginViewState, User>(it)
+                    _stateRendererMutableState.value = newStateRenderer
                 },
-                error = {},
+                error = {
+                    // loading popup state
+                    val newStateRenderer =
+                        StateRenderer.ErrorFullScreen<LoginViewState, User>(loginViewState, it)
+                    _stateRendererMutableState.value = newStateRenderer
+                },
             )
         }
     }

@@ -3,6 +3,7 @@ import deps.DependenciesVersions
 import deps.androidx
 import deps.dataModule
 import deps.domainModule
+import deps.presentationModule
 import deps.retrofit
 import deps.room
 import deps.testDebugDeps
@@ -40,6 +41,7 @@ dependencies {
     domainModule()
     retrofit()
     dataModule()
+    presentationModule()
 
     implementation("com.google.dagger:hilt-android:2.54")
     ksp("com.google.dagger:hilt-android-compiler:2.53.1")

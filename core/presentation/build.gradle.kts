@@ -1,4 +1,7 @@
 
+import deps.DependenciesVersions
+import deps.androidx
+import deps.domainModule
 import deps.testDebugDeps
 import deps.testDeps
 import deps.testImplDeps
@@ -13,13 +16,23 @@ apply<SharedLibraryGradlePlugin>()
 
 android {
     namespace = "com.multimodule.presentation"
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = DependenciesVersions.KOTLIN_COMPILER
+    }
+
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
+    androidx()
+    domainModule()
     testDeps()
     testImplDeps()
     testDebugDeps()
 
-    implementation("com.google.dagger:hilt-android:2.52")
-    ksp("com.google.dagger:hilt-android-compiler:2.52")
+    implementation("com.google.dagger:hilt-android:2.54")
+    ksp("com.google.dagger:hilt-android-compiler:2.53.1")
 }
