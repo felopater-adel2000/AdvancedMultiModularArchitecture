@@ -2,6 +2,7 @@ package com.multimodule.navigator.destination
 
 import androidx.navigation.NamedNavArgument
 
+const val LOGIN_ROUTE = "LoginRoute"
 class LoginDestination : NavigationDestination {
     override fun destination(): String =  Screens.LoginScreenRoute.route
 

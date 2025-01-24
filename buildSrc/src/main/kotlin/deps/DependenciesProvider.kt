@@ -100,6 +100,10 @@ fun DependencyHandler.testDeps() {
     testImplementation(TestDependencies.ANDROIDX_JUNIT)
 }
 
+fun DependencyHandler.kotlinx() {
+    implementation(Dependencies.kotlinSerilaizations)
+}
+
 fun DependencyHandler.testImplDeps() {
     androidTestImplementation(TestDependencies.ANDROIDX_JUNIT)
     androidTestImplementation(TestDependencies.ANDROIDX_ESPRESSO_CORE)

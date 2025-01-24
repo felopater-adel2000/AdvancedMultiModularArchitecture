@@ -1,43 +1,49 @@
+import deps.Dependencies
+import deps.DependenciesVersions
+import deps.androidx
+import deps.dataModule
+import deps.domainModule
+import deps.presentationModule
+import deps.retrofit
+import deps.room
+import deps.testDebugDeps
+import deps.testDeps
+import deps.testImplDeps
+import plugs.SharedLibraryGradlePlugin
+
 plugins {
-    id("com.android.library")
+    id(plugs.BuildPlugins.ANDROID_LIBRARY)
+    id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.android")
 }
+apply<SharedLibraryGradlePlugin>()
 
 android {
     namespace = "com.multimodule.home"
-    compileSdk = 34
 
-    defaultConfig {
-        minSdk = 28
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+    composeOptions {
+        kotlinCompilerExtensionVersion = DependenciesVersions.KOTLIN_COMPILER
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
+    buildFeatures {
+        compose = true
     }
 }
 
 dependencies {
+    implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
+    androidx()
+    room()
+    testDeps()
+    testImplDeps()
+    testDebugDeps()
+    domainModule()
+    retrofit()
+    dataModule()
+    presentationModule()
 
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    implementation("com.google.dagger:hilt-android:2.54")
+    ksp("com.google.dagger:hilt-android-compiler:2.53.1")
 }
+

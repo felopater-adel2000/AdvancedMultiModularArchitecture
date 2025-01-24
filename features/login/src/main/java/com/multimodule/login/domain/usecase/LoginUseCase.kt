@@ -1,9 +1,9 @@
 package com.multimodule.login.domain.usecase
 
+import com.multimodule.domain.model.User
 import com.multimodule.domain.result.OutCome
 import com.multimodule.domain.usecase.AsyncUseCase
 import com.multimodule.login.data.source.LoginRemote
-import com.multimodule.login.domain.model.User
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(private val loginRemote: LoginRemote) :

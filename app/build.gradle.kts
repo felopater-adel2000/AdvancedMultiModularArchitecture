@@ -9,6 +9,7 @@ import deps.dataModule
 import deps.dataStore
 import deps.dataStoreModule
 import deps.domainModule
+import deps.kotlinx
 import deps.loginModule
 import deps.okHttp
 import deps.presentationModule
@@ -126,6 +127,7 @@ dependencies {
     testDeps()
     testImplDeps()
     testDebugDeps()
+    kotlinx()
 
     protoDataStoreModule()
 
