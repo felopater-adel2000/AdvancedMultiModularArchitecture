@@ -3,6 +3,7 @@ import deps.DependenciesVersions
 import deps.androidx
 import deps.dataModule
 import deps.domainModule
+import deps.navigatorModule
 import deps.presentationModule
 import deps.retrofit
 import deps.room
@@ -42,7 +43,9 @@ dependencies {
     retrofit()
     dataModule()
     presentationModule()
+    navigatorModule()
 
     implementation("com.google.dagger:hilt-android:2.54")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     ksp("com.google.dagger:hilt-android-compiler:2.53.1")
 }

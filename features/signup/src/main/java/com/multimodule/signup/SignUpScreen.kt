@@ -20,6 +20,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.multimodule.navigator.viewModel.AppNavigatorViewModel
 
 @Composable
 fun SignUpScreen() {
@@ -27,6 +29,8 @@ fun SignUpScreen() {
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
+
+    val navigatorViewModel: AppNavigatorViewModel = hiltViewModel()
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -40,7 +44,7 @@ fun SignUpScreen() {
                 onValueChange = { userName = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(16.dp),
             )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
@@ -49,7 +53,7 @@ fun SignUpScreen() {
                 onValueChange = { email = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(16.dp),
             )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
@@ -58,7 +62,7 @@ fun SignUpScreen() {
                 onValueChange = { password = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(16.dp),
             )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
@@ -67,18 +71,18 @@ fun SignUpScreen() {
                 onValueChange = { confirmPassword = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(16.dp),
             )
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = {  },
+                onClick = { },
             ) {
                 Text(text = "Sign Up")
             }
             Spacer(modifier = Modifier.height(16.dp))
-            TextButton(onClick = {  }) {
+            TextButton(onClick = { navigatorViewModel.navigateUp() }) {
                 Text(text = "If you have an account, Sign In Now!")
             }
         }

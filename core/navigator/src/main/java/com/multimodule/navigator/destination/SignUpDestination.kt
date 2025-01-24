@@ -2,5 +2,5 @@ package com.multimodule.navigator.destination
 
 const val SIGNUP_ROUTE = "SignUpRoute"
 class SignUpDestination : NavigationDestination {
-    override fun destination(): String = Screens.SignUpScreenRoute.route
+    override fun route(): String = Screens.SignUpScreenRoute.route
 }

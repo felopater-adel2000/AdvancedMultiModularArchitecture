@@ -9,8 +9,10 @@ import deps.dataModule
 import deps.dataStore
 import deps.dataStoreModule
 import deps.domainModule
+import deps.homeModule
 import deps.kotlinx
 import deps.loginModule
+import deps.navigatorModule
 import deps.okHttp
 import deps.presentationModule
 import deps.protoDataStoreModule
@@ -113,6 +115,8 @@ android {
 dependencies {
 
     implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
+    homeModule()
+    implementation(project(":features:signup"))
     loginModule()
     dataModule()
     dataStoreModule()
@@ -128,6 +132,7 @@ dependencies {
     testImplDeps()
     testDebugDeps()
     kotlinx()
+    navigatorModule()
 
     protoDataStoreModule()
 

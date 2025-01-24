@@ -10,7 +10,7 @@ interface AppNavigator {
     fun popBackStack()
 
     fun navigate(
-        route: String,
+        destination: String,
         builder: NavOptionsBuilder.() -> Unit = { launchSingleTop = true }
     ): Boolean
 

@@ -3,6 +3,7 @@ import deps.DependenciesVersions
 import deps.androidx
 import deps.dataModule
 import deps.domainModule
+import deps.navigatorModule
 import deps.presentationModule
 import deps.retrofit
 import deps.room
@@ -33,6 +34,7 @@ android {
 
 dependencies {
     implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
+    navigatorModule()
     androidx()
     room()
     testDeps()
