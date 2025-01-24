@@ -1,0 +1,10 @@
+package com.multimodule.navigator.destination
+
+import androidx.navigation.NamedNavArgument
+
+class LoginDestination : NavigationDestination {
+    override fun destination(): String =  Screens.LoginScreenRoute.route
+
+    override val arguments: List<NamedNavArgument>
+        get() = listOf() // pass any argument needed
+}

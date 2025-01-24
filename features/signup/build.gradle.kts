@@ -12,7 +12,7 @@ plugins {
 apply<SharedLibraryGradlePlugin>()
 
 android {
-    namespace = "com.multimodule.navigator"
+    namespace = "com.multimodule.signup"
 }
 
 dependencies {
@@ -24,4 +24,5 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.54")
     ksp("com.google.dagger:hilt-android-compiler:2.53.1")
 }
+
 
