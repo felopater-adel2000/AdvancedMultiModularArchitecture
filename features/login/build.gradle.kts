@@ -1,4 +1,5 @@
 import deps.Dependencies
+import deps.DependenciesVersions
 import deps.androidx
 import deps.dataModule
 import deps.domainModule
@@ -13,11 +14,20 @@ plugins {
     id(plugs.BuildPlugins.ANDROID_LIBRARY)
     id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.android")
 }
 apply<SharedLibraryGradlePlugin>()
 
 android {
     namespace = "com.multimodule.login"
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = DependenciesVersions.KOTLIN_COMPILER
+    }
+
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
@@ -31,6 +41,6 @@ dependencies {
     retrofit()
     dataModule()
 
-    implementation("com.google.dagger:hilt-android:2.52")
-    ksp("com.google.dagger:hilt-android-compiler:2.52")
+    implementation("com.google.dagger:hilt-android:2.54")
+    ksp("com.google.dagger:hilt-android-compiler:2.53.1")
 }
